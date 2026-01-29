@@ -35,14 +35,27 @@ const simpleHash = (str: string): string => {
 // Get users from localStorage
 const getStoredUsers = (): Record<string, { password: string; user: AuthUser }> => {
   if (typeof window === 'undefined') return {}
-  const users = localStorage.getItem('massoko-users')
-  return users ? JSON.parse(users) : {}
+  try {
+    const users = localStorage.getItem('massoko-users')
+    if (!users) return {}
+    const parsed = JSON.parse(users)
+    // Validate the structure
+    if (typeof parsed !== 'object' || parsed === null) return {}
+    return parsed
+  } catch (e) {
+    console.error('Error reading users from localStorage:', e)
+    return {}
+  }
 }
 
 // Save users to localStorage
 const saveStoredUsers = (users: Record<string, { password: string; user: AuthUser }>) => {
   if (typeof window === 'undefined') return
-  localStorage.setItem('massoko-users', JSON.stringify(users))
+  try {
+    localStorage.setItem('massoko-users', JSON.stringify(users))
+  } catch (e) {
+    console.error('Error saving users to localStorage:', e)
+  }
 }
 
 export const useAuthStore = create<AuthState>()(
@@ -106,7 +119,10 @@ export const useAuthStore = create<AuthState>()(
 
         if (!stored) {
           set({ isLoading: false })
-          return { success: false, error: 'No account found with this email. Please sign up.' }
+          return {
+            success: false,
+            error: 'No account found with this email. Note: Accounts are stored locally in your browser. If you signed up on a different device or browser, please sign up again.'
+          }
         }
 
         if (stored.password !== simpleHash(password)) {
