@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/Button'
 import { Textarea } from '@/components/ui/Input'
 import { Logo } from '@/components/Logo'
-import { questions, sections } from '@/data/questions'
+import { questions, sections, TOTAL_QUESTIONS } from '@/data/questions'
 import { useAssessmentStore } from '@/lib/store'
 
 export default function ReviewPage() {
@@ -47,7 +47,7 @@ export default function ReviewPage() {
         <div className="max-w-4xl mx-auto flex items-center justify-between">
           <Logo size="sm" />
           <span className="text-text-muted text-sm">
-            {answeredCount} of 57 answered
+            {answeredCount} of {TOTAL_QUESTIONS} answered
           </span>
         </div>
       </header>
@@ -64,60 +64,32 @@ export default function ReviewPage() {
             <FileText className="w-8 h-8 text-teal-500" />
           </div>
           <h1 className="text-3xl font-bold mb-3">
-            Paste Your Recorded Answers
+            Review & Edit Your Answers
           </h1>
           <p className="text-text-secondary max-w-xl mx-auto">
-            If you recorded externally, paste your transcriptions below.
-            Match each answer to its question number.
+            Review your answers below or paste transcriptions if you recorded externally.
+            Make sure each answer is matched to the right question.
           </p>
         </motion.div>
 
         {/* Sections */}
-        <div className="space-y-4 mb-8">
-          {/* Part 1 */}
-          <div className="mb-6">
-            <h2 className="text-lg font-semibold text-teal-500 mb-4">
-              Part 1: The Soul Work
-            </h2>
-            {sections
-              .filter((s) => s.part === 1)
-              .map((section) => (
-                <SectionAccordion
-                  key={section.id}
-                  section={section}
-                  questions={questions.filter((q) => q.section === section.id)}
-                  answers={answers}
-                  onAnswerChange={setAnswer}
-                  isExpanded={expandedSections.includes(section.id)}
-                  onToggle={() => toggleSection(section.id)}
-                />
-              ))}
-          </div>
-
-          {/* Part 2 */}
-          <div>
-            <h2 className="text-lg font-semibold text-orange-500 mb-4">
-              Part 2: The Strategy Work
-            </h2>
-            {sections
-              .filter((s) => s.part === 2)
-              .map((section) => (
-                <SectionAccordion
-                  key={section.id}
-                  section={section}
-                  questions={questions.filter((q) => q.section === section.id)}
-                  answers={answers}
-                  onAnswerChange={setAnswer}
-                  isExpanded={expandedSections.includes(section.id)}
-                  onToggle={() => toggleSection(section.id)}
-                />
-              ))}
-          </div>
+        <div className="space-y-3 mb-8">
+          {sections.map((section) => (
+            <SectionAccordion
+              key={section.id}
+              section={section}
+              questions={questions.filter((q) => q.section === section.id)}
+              answers={answers}
+              onAnswerChange={setAnswer}
+              isExpanded={expandedSections.includes(section.id)}
+              onToggle={() => toggleSection(section.id)}
+            />
+          ))}
         </div>
 
         {/* Note */}
         <p className="text-text-muted text-center text-sm mb-8">
-          Minimum 10 answers recommended for a meaningful report
+          Minimum 10 answers recommended for a comprehensive report
         </p>
 
         {/* CTA */}
@@ -127,7 +99,7 @@ export default function ReviewPage() {
             onClick={handleGenerateReport}
             className="group"
           >
-            Generate My Free Report
+            Generate My Brand Strategy Report
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </Button>
         </div>
@@ -163,7 +135,7 @@ function SectionAccordion({
   ).length
 
   return (
-    <div className="border border-bg-tertiary rounded-xl overflow-hidden mb-3">
+    <div className="border border-bg-tertiary rounded-xl overflow-hidden">
       <button
         className="w-full px-4 py-3 flex items-center justify-between hover:bg-bg-secondary transition-colors"
         onClick={onToggle}

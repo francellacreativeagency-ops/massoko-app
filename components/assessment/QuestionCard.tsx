@@ -5,6 +5,7 @@ import { Lightbulb } from 'lucide-react'
 import { Textarea } from '@/components/ui/Input'
 import { SectionBadge } from './SectionBadge'
 import type { Question } from '@/data/questions'
+import { TOTAL_QUESTIONS } from '@/data/questions'
 
 interface QuestionCardProps {
   question: Question
@@ -36,7 +37,7 @@ export function QuestionCard({
 
       {/* Question Number */}
       <p className="text-center text-text-muted mb-2">
-        Question {question.id} of 57
+        Question {question.id} of {TOTAL_QUESTIONS}
       </p>
 
       {/* Question Title */}

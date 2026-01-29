@@ -1,112 +1,6 @@
-import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
-import { questions, sections } from '@/data/questions'
+# Brand Strategy Report Generation Prompt
 
-export interface User {
-  email: string
-  firstName: string
-}
-
-interface AssessmentState {
-  // User info
-  user: User | null
-  setUser: (user: User) => void
-
-  // Assessment answers
-  answers: Record<number, string>
-  setAnswer: (questionId: number, answer: string) => void
-
-  // Current question
-  currentQuestion: number
-  setCurrentQuestion: (questionId: number) => void
-
-  // Helper functions
-  getAnsweredCount: () => number
-  getAllAnswersText: () => string
-  getFormattedPrompt: () => string
-  reset: () => void
-}
-
-const initialState = {
-  user: null,
-  answers: {},
-  currentQuestion: 1,
-}
-
-export const useAssessmentStore = create<AssessmentState>()(
-  persist(
-    (set, get) => ({
-      ...initialState,
-
-      setUser: (user) => set({ user }),
-
-      setAnswer: (questionId, answer) =>
-        set((state) => ({
-          answers: { ...state.answers, [questionId]: answer },
-        })),
-
-      setCurrentQuestion: (questionId) => set({ currentQuestion: questionId }),
-
-      getAnsweredCount: () => {
-        const answers = get().answers
-        return Object.values(answers).filter((a) => a && a.trim().length > 0).length
-      },
-
-      getAllAnswersText: () => {
-        const answers = get().answers
-        return Object.entries(answers)
-          .filter(([, answer]) => answer && answer.trim().length > 0)
-          .sort(([a], [b]) => parseInt(a) - parseInt(b))
-          .map(([id, answer]) => `Question ${id}: ${answer}`)
-          .join('\n\n')
-      },
-
-      getFormattedPrompt: () => {
-        const { user, answers } = get()
-        const firstName = user?.firstName || 'Friend'
-
-        // Build formatted answers grouped by section
-        const answersBySection: Record<number, string[]> = {}
-
-        Object.entries(answers)
-          .filter(([, answer]) => answer && answer.trim().length > 0)
-          .sort(([a], [b]) => parseInt(a) - parseInt(b))
-          .forEach(([id, answer]) => {
-            const question = questions.find(q => q.id === parseInt(id))
-            if (!question) return
-
-            if (!answersBySection[question.section]) {
-              answersBySection[question.section] = []
-            }
-
-            answersBySection[question.section].push(
-              `**${question.title}**
-Q: ${question.question}
-A: ${answer}`
-            )
-          })
-
-        // Format answers by section
-        const formattedAnswers = sections
-          .filter(section => answersBySection[section.id]?.length > 0)
-          .map(section => {
-            return `### ${section.title} (${section.subtitle})
-
-${answersBySection[section.id].join('\n\n')}`
-          })
-          .join('\n\n---\n\n')
-
-        return `# BRAND STRATEGY REPORT REQUEST
-
-## Client Information
-**Name:** ${firstName}
-**Date:** ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-
----
-
-## System Role
-
-You are an elite brand strategist with 20+ years of experience building million-dollar brands. Your task is to generate a comprehensive, Grade-A brand strategy report that will serve as the foundation for a high-converting, profitable business. This report should be 60-70 pages of complete strategic clarity.
+**System Role:** You are an elite brand strategist with 20+ years of experience building million-dollar brands. Your task is to generate a comprehensive, Grade-A brand strategy report that will serve as the foundation for a high-converting, profitable business. This report is 60-70 pages of complete strategic clarity.
 
 ---
 
@@ -370,40 +264,6 @@ For each of the 3 main competitors:
 
 ---
 
-### 13. THE NEXT STEP - BUILDING YOUR LEAD MAGNET ASSESSMENT
-
-#### Why an Assessment is the Perfect Lead Magnet
-
-Before a patient gets a prescription from a doctor, they don't start taking medicine. First, they go through diagnostic tests and assessments. The doctor runs labs, takes measurements, asks detailed questions—all to understand what's actually wrong. Only then does the doctor prescribe treatment.
-
-Your lead magnet should work the same way.
-
-Instead of immediately selling your offer, create a diagnostic assessment that reveals your prospect's specific problems and gaps. This assessment:
-
-- **Provides genuine value upfront** without asking for anything in return
-- **Qualifies leads** by identifying who truly needs your solution
-- **Builds credibility** by demonstrating your expertise and deep understanding
-- **Creates urgency** by revealing the cost of their current situation
-- **Naturally bridges** to your offer as the logical next step
-
-#### The Assessment Framework
-
-Based on the strategy outlined in this report, provide a recommended assessment framework including:
-
-- Assessment Name (based on their niche and transformation)
-- Assessment Goal
-- 6 sections with 4-5 questions each
-- Scoring system with interpretations
-- Assessment Results Report structure
-
-#### The Complete Funnel
-
-- Step 1: Assessment Lead Magnet
-- Step 2: Brand Strategy Report
-- Step 3: Implementation (Their App/Service)
-
----
-
 ## QUALITY STANDARDS
 
 ### Tone & Style
@@ -440,25 +300,22 @@ Based on the strategy outlined in this report, provide a recommended assessment 
 
 ---
 
-## CLIENT'S ASSESSMENT ANSWERS
+## GENERATION INSTRUCTIONS
 
-${formattedAnswers}
+1. **Analyze the responses:** Deeply understand the client's business, audience, and goals
+2. **Identify patterns:** Look for themes, contradictions, and opportunities
+3. **Synthesize insights:** Connect the dots between different pieces of information
+4. **Create the strategy:** Use the output structure above to generate the complete document
+5. **Add strategic thinking:** Don't just summarize answers—add your expert insights and recommendations
+6. **Ensure consistency:** Make sure all sections align and support each other
+7. **Optimize for value:** Make every word count and every section valuable
 
 ---
 
 ## NOW CREATE THE REPORT
 
-You have all the information needed. Generate a comprehensive, Grade-A brand strategy report for ${firstName} that will serve as the foundation for a million-dollar brand.
+You have all the information needed. Generate a comprehensive, Grade-A brand strategy report that will serve as the foundation for a million-dollar brand.
 
 The client is ready. The market is ready. The only thing missing is the strategy.
 
-**Create it.**`
-      },
-
-      reset: () => set(initialState),
-    }),
-    {
-      name: 'massoko-assessment',
-    }
-  )
-)
+**Create it.**

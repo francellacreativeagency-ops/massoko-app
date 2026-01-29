@@ -159,28 +159,28 @@ export default function FreeReportPage() {
                 <Zap className="w-8 h-8 text-teal-500" />
               </div>
               <h2 className="text-2xl md:text-3xl font-bold mb-3">
-                Get Your Full Brand Strategy Report
+                Get Your 60-Page Brand Strategy Blueprint
               </h2>
               <p className="text-text-secondary mb-6 max-w-lg mx-auto">
                 Copy the prompt below and paste it into Claude to generate your
-                comprehensive, personalized brand strategy report instantly.
+                comprehensive, Grade-A brand strategy report instantly.
               </p>
 
               {/* What You'll Get */}
               <div className="grid md:grid-cols-2 gap-3 text-left mb-8 max-w-2xl mx-auto">
                 {[
-                  'Brand Essence & Core Identity',
-                  'Custom Signature Framework',
-                  'Unique Voice & Vibe Profile',
-                  'Monetizable Strengths Analysis',
-                  'Brand Positioning Statement',
-                  'Target Audience Deep-Dive',
-                  'Competitive Edge Summary',
-                  'Content Pillar Strategy',
-                  'Monetization Roadmap (4 Tiers)',
-                  'Actionable Next Steps',
-                  'Strategic Priority & Quick Wins',
-                  'Complete Brand Assets (Bios, LinkedIn, etc.)',
+                  'Executive Summary & Positioning',
+                  'Brand Foundation & Essence',
+                  '3 Detailed Customer Avatars',
+                  'Transformation Promise & Journey',
+                  'Offer Architecture (3 Tiers)',
+                  'Messaging & Positioning Strategy',
+                  'Content & Marketing Strategy',
+                  'Business Model & Revenue Plan',
+                  'Competitive Analysis',
+                  '90-Day Action Plan',
+                  'Lead Magnet Assessment Framework',
+                  'Unfair Advantage & Differentiation',
                 ].map((item, index) => (
                   <div key={index} className="flex items-center gap-2">
                     <Check className="w-4 h-4 text-teal-500 flex-shrink-0" />

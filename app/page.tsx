@@ -78,7 +78,7 @@ export default function LandingPage() {
         <div className="max-w-4xl mx-auto text-center">
           <motion.div {...fadeInUp}>
             <span className="inline-block px-4 py-2 bg-teal-500/10 text-teal-500 rounded-full text-sm font-medium mb-6">
-              Brand Strategy Assessment
+              Strategic Brand Discovery
             </span>
           </motion.div>
 
@@ -88,16 +88,13 @@ export default function LandingPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
           >
-            You&apos;ve got the skills.
+            Get Your Complete{' '}
+            <span className="text-teal-500">60-Page</span>
             <br />
-            You&apos;ve got the experience.
-            <br />
-            <span className="text-text-secondary">
-              You&apos;ve even got ideas for offers—
-            </span>
+            Brand Strategy Blueprint
             <br />
             <span className="text-orange-500">
-              But you can&apos;t seem to package it into something people will actually pay for.
+              In Under an Hour
             </span>
           </motion.h1>
 
@@ -107,8 +104,9 @@ export default function LandingPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
-            Take this assessment to uncover exactly who you serve, what you offer,
-            and how to talk about it—so you can finally start building the business only you can build.
+            Answer 44 strategic questions and receive a comprehensive brand strategy report
+            covering your positioning, audience, offers, messaging, and 90-day action plan—
+            the kind of clarity that typically costs $2,000-$5,000 in consulting.
           </motion.p>
 
           <motion.div
@@ -118,12 +116,12 @@ export default function LandingPage() {
           >
             <Link href="/start">
               <Button size="lg" className="group">
-                Get My Brand Strategy Report
+                Start My Brand Strategy Assessment
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
             <p className="mt-4 text-text-muted text-sm">
-              Takes ~45 minutes | Get your personalized report
+              44 questions | ~30 minutes | Comprehensive strategy report
             </p>
           </motion.div>
         </div>
