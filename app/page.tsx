@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { ArrowRight, Check, X, Target, MessageSquare, Package, ChevronDown, Star, LogIn, UserPlus, LogOut, User } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/Button'
@@ -349,8 +350,15 @@ export default function LandingPage() {
               variants={fadeInUp}
               className="relative"
             >
-              <div className="aspect-square bg-gradient-to-br from-teal-500/20 to-orange-500/20 rounded-3xl flex items-center justify-center">
-                <div className="text-8xl">FK</div>
+              <div className="aspect-square rounded-3xl overflow-hidden">
+                <Image
+                  src="/images/francis-kiing.jpg"
+                  alt="Francis Kiing - Brand Strategist"
+                  width={500}
+                  height={500}
+                  className="w-full h-full object-cover"
+                  priority
+                />
               </div>
             </motion.div>
           </motion.div>
