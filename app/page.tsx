@@ -64,7 +64,7 @@ export default function LandingPage() {
                   </Button>
                 </Link>
                 <Link href="/start">
-                  <Button size="sm">Start Free Assessment</Button>
+                  <Button size="sm">Start Assessment</Button>
                 </Link>
               </>
             )}
@@ -77,7 +77,7 @@ export default function LandingPage() {
         <div className="max-w-4xl mx-auto text-center">
           <motion.div {...fadeInUp}>
             <span className="inline-block px-4 py-2 bg-teal-500/10 text-teal-500 rounded-full text-sm font-medium mb-6">
-              Free Brand Strategy Assessment
+              Brand Strategy Assessment
             </span>
           </motion.div>
 
@@ -106,7 +106,7 @@ export default function LandingPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
-            Take this free assessment to uncover exactly who you serve, what you offer,
+            Take this assessment to uncover exactly who you serve, what you offer,
             and how to talk about it—so you can finally start building the business only you can build.
           </motion.p>
 
@@ -117,12 +117,12 @@ export default function LandingPage() {
           >
             <Link href="/start">
               <Button size="lg" className="group">
-                Get My Free Brand Strategy Report
+                Get My Brand Strategy Report
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
             <p className="mt-4 text-text-muted text-sm">
-              Takes ~45 minutes | Get your personalized report | 100% free
+              Takes ~45 minutes | Get your personalized report
             </p>
           </motion.div>
         </div>
@@ -437,8 +437,8 @@ export default function LandingPage() {
               answer="The assessment takes about 45 minutes to complete. We recommend finding a quiet space and answering thoughtfully for the best results."
             />
             <FAQItem
-              question="Is this really free?"
-              answer="Yes! The entire assessment and brand strategy report are completely free. You'll get a beautifully formatted prompt to paste into Claude AI for your comprehensive personalized report."
+              question="How do I get my full report?"
+              answer="After completing the assessment, you'll get a beautifully formatted prompt to paste into Claude AI for your comprehensive personalized brand strategy report."
             />
             <FAQItem
               question="What happens after I complete the assessment?"
@@ -496,7 +496,7 @@ export default function LandingPage() {
             <motion.div variants={fadeInUp}>
               <Link href="/start">
                 <Button size="lg" className="group">
-                  Start My Free Assessment
+                  Start My Assessment
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
